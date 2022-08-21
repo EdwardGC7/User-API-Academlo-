@@ -16,20 +16,24 @@ const UsersForm = ({isActive, createNewUser, setActive, title, updateInfo, getAl
   const { register, handleSubmit, reset } = useForm()
 
   const submit = data => {
-    if (updateInfo) {
-      const url = `https://users-crud1.herokuapp.com/users/${updateInfo.id}/`;
-      axios.put(url, data)
-      .then(res => {
-        getAllUsers()
+    try {
+      if (updateInfo) {
+        const url = `https://users-crud1.herokuapp.com/users/${updateInfo.id}/`;
+        axios.put(url, data)
+        .then(res => {
+          getAllUsers()
+          reset(defaultValue)
+          setActive(false)
+        })
+        .catch(err => console.log(err))
+  
+      } else {
+        createNewUser(data)
         reset(defaultValue)
         setActive(false)
-      })
-      .catch(err => console.log(err))
-
-    } else {
-      createNewUser(data)
-      reset(defaultValue)
-      setActive(false)
+      }
+    } catch (error) {
+      alert('Make sure the email is not already in use')
     }
   }
 

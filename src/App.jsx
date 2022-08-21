@@ -36,7 +36,7 @@ function App() {
 
   const callFormCreate = ()=>{
     setTitle('New User');
-    toggleClass();
+    toggleClass(); 
   }
 
   const toggleClass = () => {
